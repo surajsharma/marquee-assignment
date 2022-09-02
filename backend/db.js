@@ -6,16 +6,18 @@ const { Client } = require("pg");
 const baseClient = new Client({
     host: process.env.PGHOST,
     port: process.env.PGPORT,
-    ssl: false
+    ssl: false,
+    user: process.env.PGUSER,
+    password: process.env.PGPASS
 });
 
 const dbClient = new Client({
     host: process.env.PGHOST,
     port: process.env.PGPORT,
     ssl: false,
-    database: process.env.PGDB
+    database: process.env.PGDB,
+    user: process.env.PGUSER,
+    password: process.env.PGPASS
 });
 
-module.exports = { dbClient, baseClient };
-
-// module.exports = { connect: dbConnect, db: client };
+module.exports = { baseClient, dbClient };
