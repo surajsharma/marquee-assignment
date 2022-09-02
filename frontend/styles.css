@@ -1,0 +1,35 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+.mt-6 {
+    margin-top: 220px !important;
+    position: absolute;
+}
+
+table {
+    border: 1px solid lightgray;
+    width: 90vw;
+    margin-bottom: 20px;
+}
+
+tbody {
+    border-bottom: 1px solid lightgray;
+}
+
+th {
+    border-bottom: 1px solid lightgray;
+    border-right: 1px solid lightgray;
+    padding: 2px 4px;
+    background-color: rgb(190, 48, 190);
+    color: wheat;
+}
+
+.thName:hover {
+    background-color: rgb(88, 1, 88);
+}
+
+tr:hover {
+    background-color: lightblue;
+}
