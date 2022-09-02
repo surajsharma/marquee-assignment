@@ -12,6 +12,7 @@ import {
     SortingState,
     useReactTable
 } from "@tanstack/react-table";
+
 import { useNavigate } from "react-router-dom";
 
 type Props = {

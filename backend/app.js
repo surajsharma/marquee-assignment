@@ -1,5 +1,7 @@
 require("dotenv").config();
 
+let sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
 var createError = require("http-errors");
 var express = require("express");
 var cookieParser = require("cookie-parser");
@@ -41,6 +43,8 @@ app.use(function (err, req, res, next) {
 
 //connect to db
 async function initDB() {
+    console.log("🔫 db init in 5 seconds, env: " + process.env.PGDB);
+    await sleep(2000);
     try {
         await baseClient.connect();
         console.log("✅ basic connection to db");
@@ -57,22 +61,24 @@ async function initDB() {
         }
         await baseClient.end();
     } catch (error) {
-        console.log(error);
+        console.log("💣", error);
+        // throw error;
     }
     try {
         await dbClient.connect();
         console.log(`✅ connection to db ${process.env.PGDB}`);
         const companyQuery = await dbClient.query(
-            `CREATE TABLE IF NOT EXISTS "companies" (${company_table});`
+            `CREATE TABLE IF NOT EXISTS ${process.env.PGTABLE} (${company_table});`
         );
 
         if (companyQuery.rowCount >= 0) {
             console.log(
-                `✅ ready to transact at ${process.env.PGDB}/companies`
+                `✅ ready to transact at ${process.env.PGDB}/${process.env.PGTABLE}`
             );
         }
     } catch (error) {
-        console.log(error);
+        console.log("💣💣", error);
+        // throw error;
     }
 }
 
