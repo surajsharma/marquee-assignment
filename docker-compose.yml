@@ -23,6 +23,14 @@ services:
             - pg
         networks:
             - local
+    adminer:
+        image: adminer:latest
+        environment:
+            ADMINER_DEFAULT_SERVER: pg
+        ports:
+            - 8080:8080
+        networks:
+            - local
     frontend:
         build: ./frontend
         command: npm start

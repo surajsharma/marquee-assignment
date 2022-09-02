@@ -44,7 +44,7 @@ app.use(function (err, req, res, next) {
 //connect to db
 async function initDB() {
     console.log("🔫 db init in 5 seconds, env: " + process.env.PGDB);
-    await sleep(5000);
+    await sleep(2000);
     try {
         await baseClient.connect();
         console.log("✅ basic connection to db");
