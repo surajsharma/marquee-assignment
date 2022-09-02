@@ -2,9 +2,6 @@
     "name": "frontend",
     "version": "1.0.0",
     "description": "marquee capital demo app",
-    "keywords": [
-        "demo"
-    ],
     "main": "src/index.tsx",
     "dependencies": {
         "@tanstack/react-table": "^8.5.13",
