@@ -12,7 +12,7 @@ var indexRouter = require("./routes/index");
 
 var app = express();
 
-const { dbClient } = require("./db");
+const { baseClient, dbClient } = require("./db");
 const { company_table } = require("./schemas");
 
 // middlewares
@@ -45,25 +45,25 @@ app.use(function (err, req, res, next) {
 async function initDB() {
     console.log("🔫 db init in 5 seconds, env: " + process.env.PGDB);
     await sleep(5000);
-    // try {
-    //     await baseClient.connect();
-    //     console.log("✅ basic connection to db");
+    try {
+        await baseClient.connect();
+        console.log("✅ basic connection to db");
 
-    //     const dbQuery = await baseClient.query(
-    //         `SELECT FROM pg_database WHERE datname = $1`,
-    //         [`${process.env.PGDB}`]
-    //     );
+        const dbQuery = await baseClient.query(
+            `SELECT FROM pg_database WHERE datname = $1`,
+            [`${process.env.PGDB}`]
+        );
 
-    //     if (dbQuery.rows.length === 0) {
-    //         // database does not exist, make it:
-    //         console.log("no db found, creating one");
-    //         await baseClient.query(`CREATE DATABASE ${process.env.PGDB}`);
-    //     }
-    //     await baseClient.end();
-    // } catch (error) {
-    //     console.log("💣", error);
-    //     throw error;
-    // }
+        if (dbQuery.rows.length === 0) {
+            // database does not exist, make it:
+            console.log("no db found, creating one");
+            await baseClient.query(`CREATE DATABASE ${process.env.PGDB}`);
+        }
+        await baseClient.end();
+    } catch (error) {
+        console.log("💣", error);
+        // throw error;
+    }
     try {
         await dbClient.connect();
         console.log(`✅ connection to db ${process.env.PGDB}`);
@@ -78,7 +78,7 @@ async function initDB() {
         }
     } catch (error) {
         console.log("💣💣", error);
-        throw error;
+        // throw error;
     }
 }
 

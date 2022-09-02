@@ -1,5 +1,7 @@
 {
     "name": "frontend",
+    "private": "true",
+    "type": "module",
     "version": "1.0.0",
     "description": "marquee capital demo app",
     "main": "src/index.tsx",
@@ -24,7 +26,7 @@
         "vite-tsconfig-paths": "^3.5.0"
     },
     "scripts": {
-        "start": "vite",
+        "start": "vite --host",
         "build": "tsc && vite build",
         "serve": "vite preview"
     },
@@ -33,6 +35,5 @@
         "not dead",
         "not ie <= 11",
         "not op_mini all"
-    ],
-    "proxy": "http://127.0.0.1:4444"
+    ]
 }

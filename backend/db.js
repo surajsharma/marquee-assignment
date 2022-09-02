@@ -3,13 +3,13 @@ require("dotenv").config();
 //db
 const { Client } = require("pg");
 
-// const baseClient = new Client({
-//     host: process.env.PGHOST,
-//     port: process.env.PGPORT,
-//     ssl: false,
-//     user: process.env.PGUSER,
-//     password: process.env.PGPASS
-// });
+const baseClient = new Client({
+    host: process.env.PGHOST,
+    port: process.env.PGPORT,
+    ssl: false,
+    user: process.env.PGUSER,
+    password: process.env.PGPASS
+});
 
 const dbClient = new Client({
     host: process.env.PGHOST,
@@ -20,4 +20,4 @@ const dbClient = new Client({
     password: process.env.PGPASS
 });
 
-module.exports = { dbClient };
+module.exports = { baseClient, dbClient };
